@@ -10,9 +10,10 @@ DB_USER=$2
 # DB_PWD=$3
 
 
-echo "Running script 'domains/core.sql'"
-psql -U ${DB_USER} -d ${DB_NAME} -f domains/core.sql
-echo "Running script 'domains/login.sql'"
-psql -U ${DB_USER} -d ${DB_NAME} -f domains/login.sql
-
-psql -U ${DB_USER} -d ${DB_NAME}
+domains=("core" "login")
+for domain in "${domains[@]}"
+do
+    echo "Running script 'domains/${domain}.sql'"
+    psql -U ${DB_USER} -d ${DB_NAME} -f domains/${domain}.sql
+    echo
+done
