@@ -27,6 +27,7 @@ CREATE TABLE core.posts (
 
     author_id BIGSERIAL NOT NULL,
     content VARCHAR(140) NOT NULL, -- posts cannot be 'empty'
+    published_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     -- parent_post_id BIGSERIAL, -- if NULL, that is the parent post. If not, it is a reply
 
     PRIMARY KEY (_id),
