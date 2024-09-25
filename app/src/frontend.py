@@ -1,6 +1,7 @@
 """
 """
 
+import json
 
 import falcon
 
@@ -21,21 +22,8 @@ class FrontEndTimeline(FrontEnd):
         super(FrontEndTimeline, self).__init__(backend)
 
     def on_get(self, req, resp):
+        timeline = self.backend.get_timeline()
+
         resp.status = falcon.HTTP_200
-        resp.content_type = falcon.MEDIA_TEXT # Default is JSON, so override
-        resp.text = "foobar"
-
-
-class FrontEndUser(object):
-    """docstring for FrontEndUser"""
-    def __init__(self, arg):
-        super(FrontEndUser, self).__init__()
-        self.arg = arg
-
-
-class FrontEndPost(object):
-    """docstring for FrontEndPost"""
-    def __init__(self, arg):
-        super(FrontEndPost, self).__init__()
-        self.arg = arg
-        
+        # resp.content_type = falcon.MEDIA_TEXT # Default is JSON, so override
+        resp.text = json.dumps(timeline, ensure_ascii=False, indent=4)
