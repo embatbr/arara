@@ -17,3 +17,4 @@ psql -U postgres -c "CREATE USER ${DB_USER} WITH ENCRYPTED PASSWORD '${DB_PWD}';
 psql -U postgres -c "CREATE DATABASE ${DB_NAME} WITH OWNER = ${DB_USER};"
 
 ./db-up.sh "${DB_NAME}" "${DB_USER}" "${DB_PWD}"
+./populate-db.sh "${DB_NAME}" "${DB_USER}" "${DB_PWD}"
