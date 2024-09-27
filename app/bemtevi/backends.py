@@ -1,6 +1,3 @@
-"""
-"""
-
 import psycopg2
 
 
@@ -20,10 +17,11 @@ class BackEnd(object):
             try:
                 self._conn = psycopg2.connect(**self._db_config)
                 print('Connected to the PostgreSQL server.')
-                return self._conn
             except (psycopg2.DatabaseError, Exception) as error:
-                print(error)
-                return None
+                print('error:', error)
+                self._conn = None
+
+        return self._conn
 
 
 class BackEndCore(BackEnd):

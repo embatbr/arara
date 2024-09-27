@@ -3,8 +3,8 @@ from configparser import ConfigParser
 from wsgiref.simple_server import make_server
 import falcon
 
-from frontend import FrontEndTimeline
-from backend import BackEndCore
+from .frontends import FrontEndIndex
+from .backends import BackEndCore
 
 
 def load_config(filename, section):
@@ -26,13 +26,6 @@ app = falcon.App()
 
 db_config = load_config('database.ini', 'postgresql')
 backend_core = BackEndCore(db_config)
-frontend_timeline = FrontEndTimeline(backend_core)
+frontend_index = FrontEndIndex(backend_core)
 
-app.add_route('/', frontend_timeline)
-
-if __name__ == '__main__':
-    with make_server('', 8000, app) as httpd:
-        print('Serving on port 8000...')
-
-        # Serve until process is killed
-        httpd.serve_forever()
+app.add_route('/', frontend_index)

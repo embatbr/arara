@@ -7,4 +7,4 @@ cd ${PROJECT_ROOT_PATH}
 
 pip install -r requirements.txt
 
-python src/main.py
+gunicorn --reload bemtevi.main:app

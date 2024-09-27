@@ -1,6 +1,3 @@
-"""
-"""
-
 import json
 
 import falcon
@@ -16,10 +13,12 @@ class FrontEnd(object):
         self.backend = backend
 
 
-class FrontEndTimeline(FrontEnd):
+class FrontEndIndex(FrontEnd):
+    """Index page shows the timeline, according to the user defined settings.
+    """
 
     def __init__(self, backend):
-        super(FrontEndTimeline, self).__init__(backend)
+        super(FrontEndIndex, self).__init__(backend)
 
     def on_get(self, req, resp):
         timeline = self.backend.get_timeline()
