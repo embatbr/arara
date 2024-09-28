@@ -1,3 +1,6 @@
+"""Basically a layer of "persistence" over the database.
+"""
+
 import psycopg2
 
 

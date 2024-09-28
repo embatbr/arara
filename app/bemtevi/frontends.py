@@ -1,3 +1,6 @@
+"""Controllers that respond to a specified path returning a webpage.
+"""
+
 import json
 
 import falcon
@@ -24,5 +27,5 @@ class FrontEndIndex(FrontEnd):
         timeline = self.backend.get_timeline()
 
         resp.status = falcon.HTTP_200
-        # resp.content_type = falcon.MEDIA_TEXT # Default is JSON, so override
+        # resp.content_type = falcon.MEDIA_TEXT # Default is application/json, so override
         resp.text = json.dumps(timeline, ensure_ascii=False, indent=4)
