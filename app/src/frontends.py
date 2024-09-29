@@ -1,10 +1,12 @@
-"""Controllers that respond to a specified path returning a webpage.
+"""Kind of "controllers" that respond to a specified path returning a webpage.
 """
 
 import json
 
 import falcon
 from jinja2 import Environment, FileSystemLoader
+
+from src.settings import Env
 
 
 class FrontEnd(object):
@@ -33,14 +35,10 @@ class FrontEndIndex(FrontEnd):
             "username": feed[0]["username"]
         }
 
-        jinja2_env = Environment(loader=FileSystemLoader("bemtevi/static/templates"))
+        jinja2_env = Environment(loader=FileSystemLoader(Env.HTML_TEMPLATES_PATH))
         template = jinja2_env.get_template("index.html")
-        rendered_template = template.render(listFlag=True, items=feed, logged_user=logged_user)
+        webpage = template.render(listFlag=True, items=feed, logged_user=logged_user)
 
         resp.status = falcon.HTTP_200
-        resp.content_type = "text/html" # Default is application/json, so override
-        resp.text = rendered_template
-
-        # with open('bemtevi/content/index.html', 'r') as file:
-        #     resp.body = file.read()
-        # resp.text = json.dumps(feed, ensure_ascii=False, indent=4)
+        resp.content_type = "text/html"
+        resp.text = webpage

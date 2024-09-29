@@ -3,23 +3,27 @@
 
 import psycopg2
 
+from src.settings import Env
+
 
 class BackEnd(object):
     """Base class for back ends.
     """
 
-    def __init__(self, db_config):
+    def __init__(self, db_config_section):
         super(BackEnd, self).__init__()
 
-        self._db_config = db_config
+        self._db_config_section = db_config_section # TODO remove
         self._conn = None
 
     @property
     def conn(self):
         if (self._conn is None) or (self._conn.closed != 0):
             try:
-                self._conn = psycopg2.connect(**self._db_config)
+                db_config = Env.DB_CONFIGS[self._db_config_section]
+                self._conn = psycopg2.connect(**db_config)
                 print('Connected to the PostgreSQL server.')
+
             except (psycopg2.DatabaseError, Exception) as error:
                 print('error:', error)
                 self._conn = None
@@ -30,10 +34,13 @@ class BackEnd(object):
 
 class BackEndFeed(BackEnd):
 
-    def __init__(self, db_config):
-        super(BackEndFeed, self).__init__(db_config)
+    def __init__(self, db_config_section="feed"):
+        super(BackEndFeed, self).__init__(db_config_section)
 
     def get_feed(self):
+        if not self.conn:
+            raise psycopg2.DatabaseError("No database connection")
+
         query = """
         SELECT
             B.username,
