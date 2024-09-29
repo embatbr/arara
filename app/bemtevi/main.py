@@ -1,10 +1,15 @@
 from configparser import ConfigParser
+import os
 
 from wsgiref.simple_server import make_server
 import falcon
 
 from .frontends import FrontEndIndex
 from .backends import BackEndFeed
+
+
+PROJECT_ROOT_PATH = os.environ['PROJECT_ROOT_PATH']
+STATIC_PATH = f'{PROJECT_ROOT_PATH}/bemtevi/static'
 
 
 def load_config(filename, section):
@@ -29,3 +34,6 @@ backend_feed = BackEndFeed(db_config)
 frontend_index = FrontEndIndex(backend_feed)
 
 app.add_route('/', frontend_index)
+
+app.add_static_route('/images', f'{STATIC_PATH}/images')
+app.add_static_route('/css', f'{STATIC_PATH}/css')

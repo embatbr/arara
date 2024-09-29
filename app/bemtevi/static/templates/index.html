@@ -20,9 +20,6 @@
       <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper">
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-              <i class="material-icons">menu</i>
-            </a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
               <li>
                 <a href="index.html" class="active">
@@ -42,14 +39,14 @@
             <!-- profil card -->
             <div class="card">
               <div class="card-image">
-                <img src="images/gandalf.jpg">
+                <img src="images/{{ username }}.jpg">
               </div>
               <div class="card-content">
                 <span class="card-title">
                   <div style="margin-top: -20px;">
-                    <b>Gandalf The Grey</b>
+                    <b>{{ username }}</b>
                     <br />
-                    <b><small>@gandalf</small></b>
+                    <b><small>@{{ username }}</small></b>
                   </div>
                 </span>
               </div>
@@ -71,13 +68,13 @@
              
             <ul class="collection" style="border:none;">
               <li class="collection-item avatar">
-                <img src="images/gandalf.jpg" alt="" class="circle">
+                <img src="images/{{ username }}.jpg" alt="" class="circle">
                 <span class="title">
-                  <strong>Gandalf The Grey</strong> <small>@gandalf . Jun 6</small>
+                  <strong>{{ username }}</strong> <small>@{{ username }} . {{ post_publish_date }}</small>
                 </span>
                 <br />
                 <br />
-                <p>You cannot PASS!</p>
+                <p>{{ post_content }}</p>
                 <br />
               </li>
             </ul>

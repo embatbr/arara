@@ -56,8 +56,8 @@ class BackEndFeed(BackEnd):
         for (username, published_at, content) in result:
             ret.append({
                 'username': username,
-                'publish_date': published_at.strftime('%Y-%m-%d %H:%M:%S'),
-                'content': content
+                'post_publish_date': published_at.strftime('%Y-%m-%d %H:%M:%S'),
+                'post_content': content
             })
 
         return ret
