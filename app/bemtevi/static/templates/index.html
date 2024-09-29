@@ -3,7 +3,7 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>bem-te-vi</title>
+      <title>BEM-TE-VI</title>
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -22,9 +22,7 @@
           <div class="nav-wrapper">
             <ul id="nav-mobile" class="left hide-on-med-and-down">
               <li>
-                <a href="index.html" class="active">
-                  <i class="material-icons left">home</i>bem-te-vi
-                </a>
+                <a href="/" class="active">BEM-TE-VI</a>
               </li>
             </ul>
           </div>
@@ -36,17 +34,16 @@
 
           <!-- content left -->
           <div class="col m3">
-            <!-- profil card -->
             <div class="card">
               <div class="card-image">
-                <img src="images/{{ username }}.jpg">
+                <img src="images/{{ logged_user.username }}.jpg">
               </div>
               <div class="card-content">
                 <span class="card-title">
                   <div style="margin-top: -20px;">
-                    <b>{{ username }}</b>
+                    <b>{{ logged_user.user_displayname }}</b>
                     <br />
-                    <b><small>@{{ username }}</small></b>
+                    <b><small>@{{ logged_user.username }}</small></b>
                   </div>
                 </span>
               </div>
@@ -55,6 +52,7 @@
 
           <!-- content center -->
           <div class="col m6">
+            <!-- posting area -->
             <ul class="collection" style="border:none;">
               <div class="row collection-item">
                 <div class="input-field col s12">
@@ -65,19 +63,26 @@
                 </div>
               </div>
             </ul>
-             
-            <ul class="collection" style="border:none;">
-              <li class="collection-item avatar">
-                <img src="images/{{ username }}.jpg" alt="" class="circle">
-                <span class="title">
-                  <strong>{{ username }}</strong> <small>@{{ username }} . {{ post_publish_date }}</small>
-                </span>
-                <br />
-                <br />
-                <p>{{ post_content }}</p>
-                <br />
-              </li>
-            </ul>
+            
+            <!-- posts -->
+            {% if listFlag %}
+              {% for item in items %}
+                <ul class="collection" style="border:none;">
+                  <li class="collection-item avatar">
+                    <img src="images/{{ item.username }}.jpg" alt="" class="circle">
+                    <span class="title">
+                      <strong>{{ item.user_displayname }}</strong> <small>@{{ item.username }}</small>
+                      <br />
+                      <small>{{ item.post_publish_date }}</small>
+                    </span>
+                    <br />
+                    <br />
+                    <p>{{ item.post_content }}</p>
+                    <br />
+                  </li>
+                </ul>
+              {% endfor %}
+            {% endif %}
           </div>
 
         </div>

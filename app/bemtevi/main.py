@@ -37,3 +37,4 @@ app.add_route('/', frontend_index)
 
 app.add_static_route('/images', f'{STATIC_PATH}/images')
 app.add_static_route('/css', f'{STATIC_PATH}/css')
+app.add_static_route('/js', f'{STATIC_PATH}/js')

@@ -27,9 +27,15 @@ class FrontEndIndex(FrontEnd):
     def on_get(self, req, resp):
         feed = self.backend.get_feed()
 
+        # OBS: gambiarra; TODO trocar pelo usuário logado
+        logged_user = {
+            "user_displayname": feed[0]['user_displayname'],
+            "username": feed[0]["username"]
+        }
+
         jinja2_env = Environment(loader=FileSystemLoader("bemtevi/static/templates"))
         template = jinja2_env.get_template("index.html")
-        rendered_template = template.render(**feed[0])
+        rendered_template = template.render(listFlag=True, items=feed, logged_user=logged_user)
 
         resp.status = falcon.HTTP_200
         resp.content_type = "text/html" # Default is application/json, so override

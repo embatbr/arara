@@ -1,11 +1,11 @@
 -- core.users
 
-INSERT INTO core.users (username) VALUES
-    ('saruman'),
-    ('radagast'),
-    ('alatar'),
-    ('pallando'),
-    ('gandalf');
+INSERT INTO core.users (username, display_name) VALUES
+    ('saruman', 'Saruman The White'),
+    ('radagast', 'Radagast The Brown'),
+    ('alatar', 'Alatar The Blue'),
+    ('pallando', 'Pallando The Blue'),
+    ('gandalf', 'Gandalf The Grey');
 
 -- core.posts
 

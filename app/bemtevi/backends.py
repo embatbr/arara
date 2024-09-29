@@ -37,6 +37,7 @@ class BackEndFeed(BackEnd):
         query = """
         SELECT
             B.username,
+            B.display_name,
             A.published_at,
             A.content
         FROM
@@ -53,9 +54,10 @@ class BackEndFeed(BackEnd):
         result = cur.fetchall()
 
         ret = list()
-        for (username, published_at, content) in result:
+        for (username, display_name, published_at, content) in result:
             ret.append({
                 'username': username,
+                'user_displayname': display_name,
                 'post_publish_date': published_at.strftime('%Y-%m-%d %H:%M:%S'),
                 'post_content': content
             })

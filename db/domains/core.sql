@@ -15,6 +15,7 @@ CREATE TABLE core.users (
     --_table_hash 
 
     username VARCHAR(15) NOT NULL UNIQUE,
+    display_name VARCHAR(50) NOT NULL,
     -- TODO add flags and states
 
     PRIMARY KEY (_id)
