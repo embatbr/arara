@@ -48,7 +48,7 @@ class Env(object):
             Env.__is_loaded = True
 
     @classmethod
-    def show(cls): # TODO hide password
+    def show(cls): # TODO hide passwords
         return f"""APP_ROOT_PATH: {Env.APP_ROOT_PATH}
 STATIC_PATH: {Env.STATIC_PATH}
 DB_CONFIGS: {Env.DB_CONFIGS}

@@ -1,4 +1,4 @@
-# bem-te-vi
+# arara
 
 *Brazilian twitter*
 
