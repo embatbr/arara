@@ -17,15 +17,17 @@ class FrontEnd(object):
 
 
 class FrontEndIndex(FrontEnd):
-    """Index page shows the timeline, according to the user defined settings.
+    """Index page shows the feed, according to the user defined settings.
     """
 
     def __init__(self, backend):
         super(FrontEndIndex, self).__init__(backend)
 
     def on_get(self, req, resp):
-        timeline = self.backend.get_timeline()
+        feed = self.backend.get_feed()
 
         resp.status = falcon.HTTP_200
-        # resp.content_type = falcon.MEDIA_TEXT # Default is application/json, so override
-        resp.text = json.dumps(timeline, ensure_ascii=False, indent=4)
+        resp.content_type = "text/html" # Default is application/json, so override
+        with open('bemtevi/content/index.html', 'r') as file:
+            resp.body = file.read()
+        # resp.text = json.dumps(feed, ensure_ascii=False, indent=4)

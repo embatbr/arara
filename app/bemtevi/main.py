@@ -4,7 +4,7 @@ from wsgiref.simple_server import make_server
 import falcon
 
 from .frontends import FrontEndIndex
-from .backends import BackEndCore
+from .backends import BackEndFeed
 
 
 def load_config(filename, section):
@@ -25,7 +25,7 @@ def load_config(filename, section):
 app = falcon.App()
 
 db_config = load_config('database.ini', 'postgresql')
-backend_core = BackEndCore(db_config)
-frontend_index = FrontEndIndex(backend_core)
+backend_feed = BackEndFeed(db_config)
+frontend_index = FrontEndIndex(backend_feed)
 
 app.add_route('/', frontend_index)

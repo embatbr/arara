@@ -23,16 +23,17 @@ class BackEnd(object):
             except (psycopg2.DatabaseError, Exception) as error:
                 print('error:', error)
                 self._conn = None
+                raise error
 
         return self._conn
 
 
-class BackEndCore(BackEnd):
+class BackEndFeed(BackEnd):
 
     def __init__(self, db_config):
-        super(BackEndCore, self).__init__(db_config)
+        super(BackEndFeed, self).__init__(db_config)
 
-    def get_timeline(self):
+    def get_feed(self):
         query = """
         SELECT
             B.username,
