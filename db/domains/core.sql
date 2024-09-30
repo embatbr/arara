@@ -1,5 +1,5 @@
 -- The 'core' domain and its related tables are, as the name states, the platform's
--- main domain. Other domains related (directly or by transition) with this one. 
+-- main domain. Other domains relate (directly or by transition) with this one. 
 
 
 BEGIN;
@@ -15,8 +15,7 @@ CREATE TABLE core.users (
     --_table_hash 
 
     username VARCHAR(15) NOT NULL UNIQUE,
-    display_name VARCHAR(50) NOT NULL,
-    -- TODO add flags and states
+    -- TODO add flags, states and timestamp of signup
 
     PRIMARY KEY (_id)
 );

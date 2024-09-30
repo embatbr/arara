@@ -44,7 +44,8 @@ class BackEndFeed(BackEnd):
         query = """
         SELECT
             B.username,
-            B.display_name,
+            C.name AS display_name,
+            C.profile_picture,
             A.published_at,
             A.content
         FROM
@@ -53,6 +54,10 @@ class BackEndFeed(BackEnd):
             core.users B
             ON
                 A.author_id = B._id
+        LEFT JOIN
+            display.users C
+            ON
+                B._id = C._core_user_id
         ORDER BY
             A.published_at DESC;
         """
@@ -61,10 +66,11 @@ class BackEndFeed(BackEnd):
         result = cur.fetchall()
 
         ret = list()
-        for (username, display_name, published_at, content) in result:
+        for (username, display_name, profile_picture, published_at, content) in result:
             ret.append({
                 'username': username,
-                'user_displayname': display_name,
+                'user_display_name': display_name,
+                'user_profile_picture': profile_picture,
                 'post_publish_date': published_at.strftime('%Y-%m-%d %H:%M:%S'),
                 'post_content': content
             })

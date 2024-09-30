@@ -31,8 +31,9 @@ class FrontEndIndex(FrontEnd):
 
         # OBS: gambiarra; TODO trocar pelo usuário logado
         logged_user = {
-            "user_displayname": feed[0]['user_displayname'],
-            "username": feed[0]["username"]
+            "username": feed[0]["username"],
+            "user_display_name": feed[0]['user_display_name'],
+            "user_profile_picture": feed[0]['user_profile_picture']
         }
 
         jinja2_env = Environment(loader=FileSystemLoader(Env.HTML_TEMPLATES_PATH))

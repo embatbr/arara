@@ -1,11 +1,30 @@
 -- core.users
 
-INSERT INTO core.users (username, display_name) VALUES
-    ('saruman', 'Saruman The White'),
-    ('radagast', 'Radagast The Brown'),
-    ('alatar', 'Alatar The Blue'),
-    ('pallando', 'Pallando The Blue'),
-    ('gandalf', 'Gandalf The Grey');
+INSERT INTO core.users (username) VALUES
+    ('saruman'),
+    ('radagast'),
+    ('alatar'),
+    ('pallando'),
+    ('gandalf');
+
+-- display.users
+
+INSERT INTO display.users (_core_user_id, name, profile_picture) VALUES
+    ((SELECT _id FROM core.users WHERE username = 'saruman'),
+        'Saruman The White',
+        CONCAT('saruman_', (SELECT (array['1', '2', '3'])[floor(random() * 3 + 1)]), '.jpg')),
+    ((SELECT _id FROM core.users WHERE username = 'radagast'),
+        'Radagast The Brown',
+        CONCAT('radagast_', (SELECT (array['1', '2', '3'])[floor(random() * 3 + 1)]), '.jpg')),
+    ((SELECT _id FROM core.users WHERE username = 'alatar'),
+        'Alatar The Blue',
+        CONCAT('alatar_', (SELECT (array['1', '2', '3'])[floor(random() * 3 + 1)]), '.jpg')),
+    ((SELECT _id FROM core.users WHERE username = 'pallando'),
+        'Pallando The Blue',
+        CONCAT('pallando_', (SELECT (array['1', '2', '3'])[floor(random() * 3 + 1)]), '.jpg')),
+    ((SELECT _id FROM core.users WHERE username = 'gandalf'),
+        'Gandalf The Grey',
+        CONCAT('gandalf_', (SELECT (array['1', '2', '3'])[floor(random() * 3 + 1)]), '.jpg'));
 
 -- core.posts
 
