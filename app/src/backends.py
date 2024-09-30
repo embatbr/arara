@@ -41,8 +41,7 @@ class BackEndFeed(BackEnd):
         if not self.conn:
             raise psycopg2.DatabaseError("No database connection")
 
-        query = """
-        SELECT
+        query = """SELECT
             B.username,
             C.name AS display_name,
             C.profile_picture,
