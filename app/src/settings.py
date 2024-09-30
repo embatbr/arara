@@ -39,7 +39,7 @@ class Env(object):
     @classmethod
     def load(cls):
         if not Env.__is_loaded:
-            Env.APP_ROOT_PATH = os.environ.get('APP_ROOT_PATH')
+            Env.APP_ROOT_PATH = os.environ['APP_ROOT_PATH']
             Env.STATIC_PATH = f'{Env.APP_ROOT_PATH}/static'
             Env.HTML_TEMPLATES_PATH = f'{Env.APP_ROOT_PATH}/html_templates'
 
