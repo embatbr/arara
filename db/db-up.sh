@@ -10,7 +10,7 @@ DB_USER=$2
 DB_PWD=$3
 
 
-domains=("core" "display")
+domains=("core" "display" "auth")
 for domain in "${domains[@]}"
 do
     echo "Running script 'domains/${domain}.sql'"

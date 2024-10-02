@@ -26,6 +26,15 @@ INSERT INTO display.users (_core_user_id, name, profile_picture) VALUES
         'Gandalf The Grey',
         CONCAT('gandalf_', (SELECT (array['1', '2', '3'])[floor(random() * 3 + 1)]), '.jpg'));
 
+-- auth.users
+
+INSERT INTO auth.users (_core_user_id, username, password) VALUES
+    ((SELECT _id FROM core.users WHERE username = 'saruman'), 'saruman', 'K973cKq98F'),
+    ((SELECT _id FROM core.users WHERE username = 'radagast'), 'radagast', 'KKtlmdqQBl'),
+    ((SELECT _id FROM core.users WHERE username = 'alatar'), 'alatar', 'MIjsib8Imu'),
+    ((SELECT _id FROM core.users WHERE username = 'pallando'), 'pallando', 'ylwt232tZN'),
+    ((SELECT _id FROM core.users WHERE username = 'gandalf'), 'gandalf', 'obPsF13zij');
+
 -- core.posts
 
 INSERT INTO core.posts (author_id, content, published_at) VALUES 
