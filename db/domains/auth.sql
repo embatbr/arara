@@ -10,7 +10,7 @@ CREATE TABLE auth.users ( -- using basic http auth
     _inserted_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
     _core_user_id BIGSERIAL NOT NULL,
 
-    username VARCHAR(320) NOT NULL,
+    username VARCHAR(320) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL, -- stored as plaintext, for now
 
     PRIMARY KEY (_id),

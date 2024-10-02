@@ -1,15 +1,19 @@
 from wsgiref.simple_server import make_server
 import falcon
 
+from src.auth import SimpleAuth
 from src.frontends import FrontEndIndex
-from src.backends import BackEndFeed
+from src.backends import BackEndAuth, BackEndFeed
 from src.settings import Env
 
 
 Env.load()
 print(Env.show()) # TODO remove this
 
-app = falcon.App()
+
+backend_auth = BackEndAuth()
+simple_auth = SimpleAuth(backend_auth)
+app = falcon.App(middleware=simple_auth)
 
 backend_feed = BackEndFeed()
 frontend_index = FrontEndIndex(backend_feed)

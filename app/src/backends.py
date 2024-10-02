@@ -32,10 +32,69 @@ class BackEnd(object):
         return self._conn
 
 
+class BackEndAuth(BackEnd):
+    """Responsible to authenticate user.
+    """
+    
+    def __init__(self, db_config_section="auth"):
+        super(BackEndAuth, self).__init__(db_config_section)
+
+    def authenticate(self, username, password):
+        if not self.conn:
+            raise psycopg2.DatabaseError("No database connection")
+
+        query = """SELECT
+        EXISTS(
+            SELECT
+                1
+            FROM
+                auth.users
+            WHERE
+                username='{0}' AND
+                password='{1}'
+        );
+        """.format(username, password)
+
+        cur = self.conn.cursor()
+        cur.execute(query)
+        result = cur.fetchone()[0]
+
+        return result
+
+
 class BackEndFeed(BackEnd):
+    """Responsible to retrieve the feed.
+    """
 
     def __init__(self, db_config_section="feed"):
         super(BackEndFeed, self).__init__(db_config_section)
+
+    def get_user_display_info(self, username):
+        if not self.conn:
+            raise psycopg2.DatabaseError("No database connection")
+
+        query = """SELECT
+            A.name,
+            A.profile_picture
+        FROM
+            display.users A
+        INNER JOIN
+            core.users B
+            ON
+                A._core_user_id = B._id AND
+                B.username = '{0}';
+        """.format(username)
+
+        cur = self.conn.cursor()
+        cur.execute(query)
+        result = cur.fetchone()
+
+        return {
+            'display_name': result[0],
+            'profile_picture': result[1]
+        }
+
+        print(result)
 
     def get_feed(self):
         if not self.conn:
@@ -60,6 +119,7 @@ class BackEndFeed(BackEnd):
         ORDER BY
             A.published_at DESC;
         """
+
         cur = self.conn.cursor()
         cur.execute(query)
         result = cur.fetchall()

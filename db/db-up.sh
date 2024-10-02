@@ -19,7 +19,7 @@ do
 done
 
 
-users=("feed")
+users=("auth" "feed")
 for user in "${users[@]}"
 do
     echo "Creating user '${user}'"
